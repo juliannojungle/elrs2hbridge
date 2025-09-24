@@ -1,0 +1,58 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Configure (AVR)",
+      "type": "shell",
+      "command": "cmake",
+      "args": [
+        "-S", "${workspaceFolder}",
+        "-B", "${workspaceFolder}/build",
+        "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/avr-gcc-toolchain.cmake",
+        "-G", "MinGW Makefiles"
+      ]
+    },
+    {
+      "label": "Build (AVR)",
+      "type": "shell",
+      "command": "cmake",
+      "args": [
+        "--build", "${workspaceFolder}/build",
+        "--target", "hex"
+      ],
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": "$gcc"
+    },
+    {
+      "label": "Flash (USBasp)",
+      "type": "shell",
+      "command": "avrdude",
+      "args": [
+        "-c", "usbasp",
+        "-p", "attiny84",
+        "-U", "flash:w:${workspaceFolder}/build/elrs2hbridge.hex:i"
+      ]
+    },
+    {
+      "label": "Set Fuses (16 MHz Crystal)",
+      "type": "shell",
+      "command": "avrdude",
+      "args": [
+        "-c", "usbasp",
+        "-p", "attiny84",
+        "-U", "lfuse:w:0xFF:m",
+        "-U", "hfuse:w:0xDF:m",
+        "-U", "efuse:w:0xFF:m"
+      ]
+    },
+    {
+      "label": "Clean",
+      "type": "shell",
+      "command": "cmake",
+      "args": [
+        "--build", "${workspaceFolder}/build",
+        "--target", "clean"
+      ]
+    }
+  ]
+}
