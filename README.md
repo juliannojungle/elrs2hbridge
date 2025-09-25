@@ -1,5 +1,11 @@
 # elrs2hbridge
 
+Adaptador para controlar um carrinho RC usando uma ponte-H através de um receptor ELRS.
+
+A ponte-H possui dois canais. Um deles controla diretamente o motor principal do carrinho e o outro controla um eletroíma que move a direção.
+
+---
+
 ## 💡 Conceito
 
 - Temos um receptor de rádio controle ELRS modelo EP2 que utiliza o protocolo CRSF;
