@@ -3,7 +3,8 @@
 #include <stdint.h>
 #include "usi_uart.h"
 
-#define F_CPU 16000000UL
+// #define F_CPU 16000000UL // para cristal de 16 MHz
+#define F_CPU 20000000UL // para cristal de 20 MHz
 #define DEADZONE 100
 
 #define DIR_PIN   PA6

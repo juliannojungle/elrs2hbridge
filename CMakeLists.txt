@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.13)
 project(elrs2hbridge C)
 
 set(MCU attiny84)
-set(F_CPU 16000000UL)
+# set(F_CPU 16000000UL) # para cristal de 16 MHz
+set(F_CPU 20000000UL) # para cristal de 20 MHz
 
 set(SRC
     src/main.c

@@ -12,7 +12,11 @@ static volatile uint8_t receiving = 0;
 
 // Cada bit dura 1/420000 s = ~2.38 us
 // A 16 MHz, cada ciclo = 62.5 ns → 38 ciclos por bit
-#define BIT_TICKS 38
+// #define BIT_TICKS 38
+
+// Cada bit dura 1/420000 s = ~2.38 us
+// A 20 MHz, cada ciclo = 50 ns → 48 ciclos por bit
+#define BIT_TICKS 48
 
 void usi_uart_init(void) {
     DDRB &= ~(1 << RX_PIN);    // RX como entrada

@@ -34,7 +34,7 @@
       ]
     },
     {
-      "label": "Set Fuses (16 MHz Crystal)",
+      "label": "Set Fuses (16 MHz or 20 MHz Crystal)",
       "type": "shell",
       "command": "avrdude",
       "args": [
