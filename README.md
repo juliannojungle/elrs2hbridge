@@ -16,6 +16,8 @@
   - Invertendo a polaridade do motor, o carrinho se move para trás;
   - Variando o duty cycle do PWM é possível controlar a velocidade do carrinho.
 
+---
+
 ## 🏗️ Requisitos
 
 🚀 Implementação **real de UART RX no ATtiny84 usando USI**, adaptada para **420 000 baud** (420 kbps, CRSF).
