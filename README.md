@@ -1,10 +1,42 @@
+# elrs2hbridge
+
+## 💡 Conceito
+
+- Temos um receptor de rádio controle ELRS modelo EP2 que utiliza o protocolo CRSF;
+- Temos um AtTiny84 que recebe os dados seriais do receptor e gera sinais de saída PWM;
+- Temos uma ponte H LB1836 que recebe os sinais de saída do AtTiny84;
+- Em um dos canais da ponte H é conectada uma bobina de eletroíma, que controla a direção de um carrinho RC da seguinte maneira:
+  - Com a bobina desligada, a direção retorna naturalmente para o centro;
+  - Com a bobina energizada em uma polaridade, a direção vira para um lado;
+  - Invertendo a polaridade da bobina, a direção vira para o outro lado;
+  - Variando o duty cycle do PWM é possível controlar o quanto a direção é virada para cada lado;
+- No outro canal da ponte H, é ligado o motor principal do carrinho RC, que é controlado da seguinte maneira:
+  - Com o motor parado, o carro não se move;
+  - Com o motor energizado, o carrinho se move para frente;
+  - Invertendo a polaridade do motor, o carrinho se move para trás;
+  - Variando o duty cycle do PWM é possível controlar a velocidade do carrinho.
+
+## 🏗️ Requisitos
+
 🚀 Implementação **real de UART RX no ATtiny84 usando USI**, adaptada para **420 000 baud** (420 kbps, CRSF).
 
 > ⚠️ Observação: 420 kbps exige **clock externo estável (16 ou 20 MHz cristal/resonador)**. Se usar o oscilador interno, o erro de baud pode atrapalhar.
 
 ---
 
-## 📂 Estrutura final
+## 📂 Estrutura
+
+```css
+/elrs2hbridge
+ ├── .vscode/
+ │    └── tasks.json
+ ├── CMakeLists.txt
+ ├── Makefile
+ └── src/
+      ├── main.c
+      ├── usi_uart.c
+      └── usi_uart.h
+```
 
 * `main.c` → lógica CRSF + controle PWM/DIR.
 * `usi_uart.h` → cabeçalho da UART.

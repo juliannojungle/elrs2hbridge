@@ -1,6 +1,6 @@
 #include "usi_uart.h"
 
-#define RX_PIN   PA0   // Entrada UART (ligar ao TX do EP2)
+#define RX_PIN   PB2   // Entrada UART (ligar ao TX do EP2)
 
 static volatile uint8_t rx_buffer[RX_BUFFER_SIZE];
 static volatile uint8_t rx_head = 0;
@@ -15,8 +15,8 @@ static volatile uint8_t receiving = 0;
 #define BIT_TICKS 38
 
 void usi_uart_init(void) {
-    DDRA &= ~(1 << RX_PIN);    // RX como entrada
-    PORTA |= (1 << RX_PIN);    // Pull-up
+    DDRB &= ~(1 << RX_PIN);    // RX como entrada
+    PORTB |= (1 << RX_PIN);    // Pull-up
 
     // Habilita interrupção de pin change no RX
     GIMSK |= (1 << PCIE0);
@@ -29,7 +29,7 @@ void usi_uart_init(void) {
 
 // Interrupção: start bit detectado (borda de descida)
 ISR(PCINT0_vect) {
-    if (!(PINA & (1 << RX_PIN)) && !receiving) {
+    if (!(PINB & (1 << RX_PIN)) && !receiving) {
         receiving = 1;
         rx_bitcount = 0;
         rx_data = 0;
@@ -51,12 +51,12 @@ ISR(TIM1_COMPA_vect) {
 
     if (rx_bitcount < 8) {
         rx_data >>= 1;
-        if (PINA & (1 << RX_PIN))
+        if (PINB & (1 << RX_PIN))
             rx_data |= 0x80;
         rx_bitcount++;
     } else if (rx_bitcount == 8) {
         // Stop bit
-        if (PINA & (1 << RX_PIN)) {
+        if (PINB & (1 << RX_PIN)) {
             rx_buffer[rx_head % RX_BUFFER_SIZE] = rx_data;
             rx_head++;
         }
